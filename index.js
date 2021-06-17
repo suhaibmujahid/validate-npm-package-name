@@ -79,6 +79,15 @@ var validate = module.exports = function (name) {
     if (nameMatch) {
       var user = nameMatch[1]
       var pkg = nameMatch[2]
+
+      if (pkg.match(/^\./)) {
+        errors.push('name cannot start with a period')
+      }
+
+      if (pkg.match(/^_/)) {
+        errors.push('name cannot start with an underscore')
+      }
+
       if (encodeURIComponent(user) === user && encodeURIComponent(pkg) === pkg) {
         return done(warnings, errors)
       }
